@@ -137,6 +137,9 @@ const bool SensorHandler::Calibration()
 
 const RGB SensorHandler::GetColor(){
     uint32_t r=0, g=0, b=0, c=0;
+    char str[32];
+    char str1[64];
+    TableHandler colorTB;
     
     display.print("getting color");
     Serial.print("getting color");
@@ -169,13 +172,10 @@ const RGB SensorHandler::GetColor(){
     Serial.println("COLORI CALIBRATI:");
     Serial.print("R: ");Serial.print(rgb.r);Serial.print(" G: ");Serial.print(rgb.g);Serial.print(" B: ");Serial.print(rgb.b);
 
-    TableHandler colorTB;
     rgb = colorTB.getColor(rgb);
 
     Serial.println("COLORI CALIBRATI:");
     Serial.print("R: ");Serial.print(rgb.r);Serial.print(" G: ");Serial.print(rgb.g);Serial.print(" B: ");Serial.print(rgb.b);
-    char str[32];
-    char str1[64];
     snprintf(str,sizeof(str),"COLORE: %s",rgb.color_name); 
     snprintf(str1,sizeof(str),"R: %d G: %d B: %d", rgb.r, rgb.g, rgb.b);
     display.print(str,str1);
