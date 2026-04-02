@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport ottimizzato per bloccare lo zoom out -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Color Reader Access Point</title>
+    
+    <!-- TRUCCO CACHE: ?v=2 costringe il browser a scaricare il nuovo stile -->
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- NAVIGAZIONE TAB -->
+        <div class="tabs" data-active="config">
+            <div class="glider"></div>
+            <button class="tab-btn active" onclick="openTab('config')">Configurazione</button>
+            <button class="tab-btn" onclick="openTab('color')">Live Color</button>
+        </div>
+
+        <div class="card">
+            
+            <!-- SCHEDA 1: CONFIGURAZIONE -->
+            <div id="tab-config" class="tab-content">
+                <div class="header">
+                    <div class="icon">📡</div>
+                    <h1>Configurazione WiFi</h1>
+                    <p>Imposta rete esterna</p>
+                </div>
+                
+                <form id="wifiForm" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="ssid">Nome WiFi (SSID)</label>
+                        <input type="text" id="ssid" placeholder="Es. Vodafone-1234" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="psw">Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="psw" placeholder="Password WPA/WPA2" required>
+                            <span class="toggle-psw" onclick="togglePassword()">👁️</span>
+                        </div>
+                    </div>
+
+                    <div class="btn-container">
+                        <button id="saveBtn" type="button">Salva e Connetti</button>
+                    </div>
+                </form>
+
+                <div id="status-box" class="hidden">
+                    <p id="status-text"></p>
+                    <div class="loader" id="loader"></div>
+                </div>
+            </div>
+
+            <!-- SCHEDA 2: COLORE -->
+            <div id="tab-color" class="tab-content" style="display:none;">
+                <div class="header">
+                    <div class="icon">🎨</div>
+                    <h1>Rilevatore Colore</h1>
+                    <p>Lettura in tempo reale</p>
+                </div>
+
+                <div class="color-display-container">
+                    <div id="color-box" class="color-box"></div>
+                    <div class="rgb-values">
+                        <div class="rgb-row"><span class="lbl">R:</span> <span id="val-r">--</span></div>
+                        <div class="rgb-row"><span class="lbl">G:</span> <span id="val-g">--</span></div>
+                        <div class="rgb-row"><span class="lbl">B:</span> <span id="val-b">--</span></div>
+                    </div>
+                </div>
+
+                <div class="color-name-box">
+                    <h2 id="color-name">In attesa...</h2>
+                </div>
+            </div>
+
+        </div> <!-- Fine Card -->
+
+        <div class="footer">
+           ESP32 Color Reader Access Point
+        </div>
+    </div>
+    
+    <!-- TRUCCO CACHE anche qui -->
+    <script src="script.js?v=99"></script>
+</body>
+</html>
