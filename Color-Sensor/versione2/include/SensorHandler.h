@@ -3,12 +3,20 @@
 #define COLORSENSOR_H
 
 #include <Adafruit_TCS34725.h>
-#include "DisplayHandler.h"
 #include "Types.h"
-#include "TableHandler.h"
-#include "LittleFSHandler.h"
+#include "DisplayHandler.h"
+#include "CalibrationHandler.h"
 
 #pragma once
+
+// some magic numbers for this device from the DN40 application note
+#define TCS34725_R_Coef 0.136
+#define TCS34725_G_Coef 1.000
+#define TCS34725_B_Coef -0.444
+#define TCS34725_GA 1.0
+#define TCS34725_DF 310.0
+#define TCS34725_CT_Coef 3810.0
+#define TCS34725_CT_Offset 1391.0
 
 /**
  * @class SensorHandler
@@ -31,7 +39,7 @@ class SensorHandler {
          * Encapsulates the logic for writing r_coef, g_coef, b_coef, and real_white 
          * to the filesystem for persistence across reboots.
          */
-        void calib_saving();
+        void SavingCalibration();
 
     public: 
         /**
@@ -74,4 +82,5 @@ class SensorHandler {
          */
         const RGB GetColor();
 };
+
 #endif 

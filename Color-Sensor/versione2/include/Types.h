@@ -14,17 +14,16 @@
  */
 struct RGB_coef {
     /** 
-     * @brief Multipliers for Red, Green, and Blue channels.
-     * Calculated as: $coef = realwhite / raw\_channel\_average$.
-     */
-    float r = 1.0, g = 1.0, b = 1.0;
-
-    /** 
      * @brief Maximum raw value detected during calibration on a white surface.
      * Used as a baseline for scaling all color channels.
      */
     int realwhite = 0;
 
+    /** 
+     * @brief Multipliers for Red, Green, and Blue channels.
+     * Calculated as: $coef = realwhite / raw\_channel\_average$.
+     */
+    float r = 1.0, g = 1.0, b = 1.0;
 };
 
 /**

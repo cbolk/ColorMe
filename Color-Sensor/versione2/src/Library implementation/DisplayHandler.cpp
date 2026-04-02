@@ -1,45 +1,41 @@
 //DisplayHandler.h implementation
 #include "DisplayHandler.h"
 
-#define ROWGAP  16
-
-void DisplayHandler :: begin(){
-    {
-            theDisplay.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
-            theDisplay.clearDisplay();
-            theDisplay.setTextSize(1);
-            theDisplay.setTextColor(SSD1306_WHITE);
-        }
-}
-void DisplayHandler :: print(String row1){
-    theDisplay.clearDisplay();
-    theDisplay.setCursor(0,0);
-    theDisplay.print(row1);
-    theDisplay.theDisplay();
-}
-void DisplayHandler :: print(String row1, String row2){
-    theDisplay.clearDisplay();
-    theDisplay.setCursor(0,0);
-    theDisplay.print(row1);
-    theDisplay.setCursor(0,ROWGAP);
-    theDisplay.print(row2);
-    theDisplay.theDisplay();
+void DisplayHandler::begin() {
+    myDisplay.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
+    myDisplay.clearDisplay();
+    myDisplay.setTextSize(1);
+    myDisplay.setTextColor(SSD1306_WHITE);
 }
 
-void DisplayHandler :: displayColor(RGB rgb) {
-    char strRGB[SCREEN_WIDTH];
+void DisplayHandler::print(String row1) {
+    myDisplay.clearDisplay();
+    myDisplay.setCursor(0, 0);
+    myDisplay.print(row1);
+    myDisplay.display();
+}
+
+void DisplayHandler::print(String row1, String row2) {
+    myDisplay.clearDisplay();
+    myDisplay.setCursor(0, 0);
+    myDisplay.print(row1);
+    myDisplay.setCursor(0, 16);
+    myDisplay.print(row2);
+    myDisplay.display();
+}
+
+void DisplayHandler::displayColor(int r, int g, int b) {
+    char strRGB[MYSCREEN_WIDTH + 1];
     char strHEX[8];
 
-    theDisplay.clearDisplay();
-    theDisplay.setCursor(0, 0);
-    theDisplay.println("Colore rilevato");
-    theDisplay.setCursor(0, ROWGAP);
-    sprintf(strRGB, "R: %03d G: %03d B: %03d", rgb.r, rgb.g, rgb.b);
-    theDisplay.println(strRGB);
-    theDisplay.setCursor(0, ROWGAP*2);
-    sprintf(strHEX, "#%02x%02x%02x", rgb.r, rgb.g, rgb.b);
-    theDisplay.println(strHEX);
-    theDisplay.theDisplay();
-    
-    return COLOR_UPDATED;
+    myDisplay.clearDisplay();
+    myDisplay.setCursor(0, 0);
+    myDisplay.println("Colore rilevato");
+    myDisplay.setCursor(0, ROWGAP);
+    sprintf(strRGB, "R: %03d G: %03d B: %03d", r, g, b);
+    myDisplay.println(strRGB);
+    myDisplay.setCursor(0, ROWGAP * 2);
+    sprintf(strHEX, "#%02x%02x%02x", r, g, b);
+    myDisplay.println(strHEX);
+    myDisplay.display();
 }

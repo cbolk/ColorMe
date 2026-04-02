@@ -9,10 +9,12 @@
 /** 
  * @brief OLED Screen dimensions in pixels.
  */
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-#define OLED_RESET     -1 
-#define SCREEN_ADDRESS 0x3C 
+#define MYSCREEN_WIDTH      128
+#define MYSCREEN_HEIGHT     64
+#define OLED_RESET          -1 
+#define SCREEN_ADDRESS      0x3C 
+
+#define ROWGAP              16
 
 /**
  * @class DisplayHandler
@@ -26,7 +28,7 @@ class DisplayHandler {
         /** 
          * @brief Internal driver for the SSD1306 OLED display.
          */
-        Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+        Adafruit_SSD1306 myDisplay;
 
     public:
         /**
@@ -34,7 +36,7 @@ class DisplayHandler {
          * Initializes the display object with defined dimensions and I2C interface.
          * The reset pin is set to -1 (unused).
          */
-        DisplayHandler() : display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1) {};
+        DisplayHandler() : myDisplay(MYSCREEN_WIDTH, MYSCREEN_HEIGHT, &Wire, -1) {};
 
         /**
          * @brief Initializes the OLED display hardware.
@@ -79,6 +81,13 @@ class DisplayHandler {
          * @param row3 The string for the second line.
          */
         void print(String row1, String row2, String row3);
+
+        /**
+         * @brief Displays the color information on the display
+         * 
+         * @param rgb the color information.
+         */
+        void displayColor(int r, int g, int b);
 
 };
 
