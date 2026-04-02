@@ -11,8 +11,6 @@
  */
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
-#define OLED_RESET     -1 
-#define SCREEN_ADDRESS 0x3C 
 
 /**
  * @class DisplayHandler
@@ -26,7 +24,7 @@ class DisplayHandler {
         /** 
          * @brief Internal driver for the SSD1306 OLED display.
          */
-        Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+        Adafruit_SSD1306 display;
 
     public:
         /**
@@ -64,22 +62,6 @@ class DisplayHandler {
          * @param row2 The string for the second line.
          */
         void print(String row1, String row2);
-
-        /**
-         * @brief Clears the screen and prints two rows of text.
-         * 
-         * - Row 1 is placed at coordinate (0,0).
-         * - Row 2 is placed at coordinate (0,16), providing adequate spacing 
-         *   between lines for readability.
-         * - Row 3 is placed at coordinate (0,32), providing adequate spacing 
-         *   between lines for readability.
-         * 
-         * @param row1 The string for the first line.
-         * @param row2 The string for the second line.
-         * @param row3 The string for the second line.
-         */
-        void print(String row1, String row2, String row3);
-
 };
 
 #endif 
