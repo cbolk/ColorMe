@@ -24,15 +24,22 @@ sensor_status calibration_status = SENSOR_NEED_CALIBRATION;
 // SETUP
 void setup() {
   Serial.begin(115200);
+  Serial.println("Inizializzazione");
+  Serial.println("Tasto rilevazione (verde)");
   pinMode(TRIGGER_DETECTION, INPUT_PULLUP);
+  Serial.println("Tasto calibrazione (giallo)");
   pinMode(TRIGGER_CALIBRATION, INPUT_PULLUP);
+  Serial.println("Pin disabilita led");
   pinMode(LED_PIN, OUTPUT);
-
-  //Everything that need a .begin()
-  theDisplay.begin();
+  delay(2000);
+  Serial.println("Inizializza display");
+  //theDisplay.begin();
   delay(1000);
+  Serial.println("Display inizializzato");
+
+  Serial.println("Inizializza sensore e rileva presenza calibrazione");
   calibration_status =  sensor.begin();
-  theDisplay.print("Setup");
+  //theDisplay.print("Fase di setup terminata");
   delay(1000);  
 }
 
@@ -40,21 +47,28 @@ void setup() {
 void loop() {
   RGB col;
   if (digitalRead(TRIGGER_CALIBRATION) == LOW) {
+    Serial.println("Calibrazione");
     if(!sensor.Calibration())
-      Serial.println("Error while calibrating");
-    else
+      Serial.println("Errore in fase di calibrazione");
+    else{
+      Serial.println("Calibrazione terminata");
       calibration_status = SENSOR_OK_AND_CALIBRATED;
+    }
     delay(50); 
   }
   if (digitalRead(TRIGGER_DETECTION) == LOW) {
+    Serial.println("Rilevazione");
     if(calibration_status == SENSOR_OK_AND_CALIBRATED){
+      Serial.println("Procedo");
+      Serial.println("Accendo il led");
       digitalWrite(LED_PIN, HIGH);
       col = sensor.GetColor();
-      theDisplay.displayColor(col.r, col.g, col.b);
+//      theDisplay.displayColor(col.r, col.g, col.b);
+      Serial.println("Spengo il led");
       digitalWrite(LED_PIN, LOW);
     } else {
+      Serial.println("Prima calibrare il sensore");
       theDisplay.print("Calibrare il sensore");
-      Serial.println("Calibrare il sensore");
     }
     delay(50);
   }

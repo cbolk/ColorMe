@@ -83,6 +83,14 @@ class DisplayHandler {
         void print(String row1, String row2, String row3);
 
         /**
+         * @brief Stampa la stringa s in posizione pos
+         *  
+         * @param s La stringa da visualizzare.
+         * @param pos La posizione in cui mettere la stringa
+         */
+        void printcont(String s, int pos);
+
+        /**
          * @brief Displays the color information on the display
          * 
          * @param rgb the color information.
