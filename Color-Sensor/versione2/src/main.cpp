@@ -74,3 +74,40 @@ void loop() {
   }
   
 }
+
+const char* getColorName(float hue, float sat, float val) {
+  const char* cn = "sconosciuto";
+
+  if (sat == 0) {
+    if (val > 0.9)      cn = "bianco";
+    else if (val > 0.1) cn = "grigio";
+    else                cn = "nero";
+  } else {
+    if ((hue >= 0 && hue <= 21.5) || (hue > 325 && hue < 360)) {
+      if (val > 0.5) {
+        cn = (sat < 0.5) ? "rosa" : "rosso";
+      } else {
+        cn = (sat < 0.5) ? "rosso" : "marrone";
+      }
+    } else if (hue > 21.5 && hue <= 42) {
+      if (val > 0.6) {
+        cn = (sat < 0.5) ? "arancione chiaro" : "arancione";
+      } else {
+        cn = (sat < 0.5) ? "rosso" : "marrone";
+      }
+    } else if (hue > 42  && hue <= 65)  cn = "giallo";
+    else if   (hue > 65  && hue <= 160) cn = "verde";
+    else if   (hue > 160 && hue <= 220) cn = "ciano";
+    else if   (hue > 220 && hue <= 255) cn = "blu";
+    else if   (hue > 255 && hue <= 325) cn = "viola";
+  }
+
+  Serial.print(cn);
+  Serial.print(": ");
+  Serial.print(hue, 1);
+  Serial.print(", ");
+  Serial.print(sat, 1);
+  Serial.print(", ");
+  Serial.println(val, 1);
+  return cn;
+}
