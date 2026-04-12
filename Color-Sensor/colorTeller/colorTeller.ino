@@ -8,7 +8,8 @@
 #define SCREEN_HEIGHT 64
 #define ROWGAP 16
 #define OLED_RESET    -1
-#define SCREEN_ADDRESS 0x3C 
+#define SCREEN_ADDRESS  0x3C 
+#define SENSOR_ADDRESS  0x29
 
 #define GET_COLOR_CYCLES 10
 
